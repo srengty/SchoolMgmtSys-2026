@@ -26,13 +26,14 @@ export default function HomeScreen() {
           <View style={{ minWidth: "25%", width:'50%', flex: 1, alignItems: "center", height: 150 }}>
             <RoleButton
               roleName="Student"
-              onPress={() => router.push("/students")}
+              onPress={() => router.push("/login")}
               icon={<Ionicons name="school" size={48} color="white" />}
             />
           </View>
           <View style={{ minWidth: "25%", flex: 1, alignItems: "center", height: 150 }}>
             <RoleButton
               roleName="Teacher"
+              onPress={()=>router.push('/login')}
               icon={
                 <FontAwesome5
                   name="chalkboard-teacher"
