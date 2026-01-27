@@ -1,4 +1,5 @@
 import { FontAwesome5, Ionicons, Zocial } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import {
   Image,
@@ -9,6 +10,11 @@ import {
 } from "react-native";
 
 export default function HomeScreen() {
+  const goToTeacher=async()=>{
+    let username = AsyncStorage.getItem('loginedUser')
+    if(username){router.push('/teachers')}
+    else router.push('/login')
+  }
   return (
     <View style={styles.container}>
       <Image
@@ -33,7 +39,7 @@ export default function HomeScreen() {
           <View style={{ minWidth: "25%", flex: 1, alignItems: "center", height: 150 }}>
             <RoleButton
               roleName="Teacher"
-              onPress={()=>router.push('/login')}
+              onPress={goToTeacher}
               icon={
                 <FontAwesome5
                   name="chalkboard-teacher"

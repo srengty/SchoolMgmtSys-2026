@@ -10,6 +10,7 @@ export default function RootLayout() {
         <Stack.Screen name='students/index'
         options={{title:'Students'}}/>
         <Stack.Screen name='login' options={{title: 'Login', headerShown: false}}/>
+        <Stack.Screen name='teachers/index' options={{title: 'Teacher Dashboard', headerShown: false}}/>
     </Stack>
   )
 }

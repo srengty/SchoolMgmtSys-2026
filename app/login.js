@@ -1,12 +1,37 @@
-import { Image, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import { Entypo } from "@expo/vector-icons";
+import { router } from "expo-router";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen() {
-    const [secure,setSecure] = useState(true)
-    const [eye,setEye] = useState('eye')
+  const [secure, setSecure] = useState(true);
+  const [eye, setEye] = useState("eye");
+  const [username, setUsername] = useState();
+  const [pwd, setPwd] = useState();
+  const doLogin = async() => {
+    // Alert.alert(`user: ${username}; pwd: ${pwd}`);
+    if(username.trim().toLowerCase() == 'teacher' && pwd=='123'){
+        await AsyncStorage.setItem('loginedUser', username);
+        router.replace('/teachers')
+    }
+  };
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <Image
         source={require("../assets/home-bg.png")}
         style={{ width: "100%", height: "100%" }}
@@ -17,26 +42,47 @@ export default function LoginScreen() {
           flex: 1,
           flexDirection: "column",
           width: "100%",
-          padding: 30
+          padding: 30,
         }}
       >
         <Text>Username</Text>
         <View style={styles.inputGroup}>
-            <TextInput placeholder="Username" style={styles.input}/>
-            <Entypo name="user" size={24} color={'blue'}/>
+          <TextInput
+            placeholder="Username"
+            style={styles.input}
+            value={username}
+            onChangeText={(text) => setUsername(text)}
+          />
+          <Entypo name="user" size={24} color={"blue"} />
         </View>
         <Text>Password</Text>
         <View style={styles.inputGroup}>
-            <TextInput placeholder="Password" style={styles.input} textContentType="password" secureTextEntry={secure}/>
-            <TouchableOpacity onPress={()=>{setSecure(!secure);setEye(eye=='eye'?'eye-with-line':'eye')}}>
-                <Entypo name={eye} size={24} color={'blue'}/>
-            </TouchableOpacity>
+          <TextInput
+            placeholder="Password"
+            style={styles.input}
+            textContentType="password"
+            secureTextEntry={secure}
+            value={pwd}
+            onChangeText={(text) => setPwd(text)}
+          />
+          <TouchableOpacity
+            onPress={() => {
+              setSecure(!secure);
+              setEye(eye == "eye" ? "eye-with-line" : "eye");
+            }}
+          >
+            <Entypo name={eye} size={24} color={"blue"} />
+          </TouchableOpacity>
         </View>
-        <View style={[styles.inputGroup,{borderBottomWidth: 0}]}>
-            <MyButton text={'Login'} style={{width: '100%'}}/>
+        <View style={[styles.inputGroup, { borderBottomWidth: 0 }]}>
+          <MyButton
+            text={"Login"}
+            style={{ width: "100%" }}
+            onPress={doLogin}
+          />
         </View>
-        <TouchableOpacity activeOpacity={0.5} onPress={()=>{}}>
-            <Text style={{textAlign: 'center'}}>Forgot password?</Text>
+        <TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+          <Text style={{ textAlign: "center" }}>Forgot password?</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -50,16 +96,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   input: {
-    flexGrow: 1
-},
-inputGroup:{
+    flexGrow: 1,
+  },
+  inputGroup: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 50,
-    width: '100%',
+    width: "100%",
     borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-}
+    borderBottomColor: "gray",
+  },
 });
 
 function MyButton({ text, onPress = () => {}, ...others }) {
@@ -72,7 +118,7 @@ function MyButton({ text, onPress = () => {}, ...others }) {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            width: '100%'
+            width: "100%",
           }}
         >
           <View
@@ -81,10 +127,10 @@ function MyButton({ text, onPress = () => {}, ...others }) {
               backgroundColor: "#0C46C4",
               alignItems: "center",
               padding: 18,
-              width: '100%'
+              width: "100%",
             }}
           >
-            <Text style={{color: 'white', fontSize: 18}}>{text}</Text>
+            <Text style={{ color: "white", fontSize: 18 }}>{text}</Text>
           </View>
         </View>
       </TouchableHighlight>
