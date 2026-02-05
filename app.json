@@ -4,11 +4,11 @@
     "slug": "SchoolMgmtSys",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/school.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/spl-icon.png",
+    "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-bg.png",
+      "image": "./assets/splash-icon.png",
       "resizeMode": "stretch",
       "backgroundColor": "#ffffff"
     },

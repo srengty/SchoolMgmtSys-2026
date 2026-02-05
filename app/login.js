@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { Entypo } from "@expo/vector-icons";
 import { router } from "expo-router";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MyButton from "../components/my-button";
 
 export default function LoginScreen() {
   const [secure, setSecure] = useState(true);
@@ -108,32 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-function MyButton({ text, onPress = () => {}, ...others }) {
-  return (
-    <View {...others}>
-      <TouchableHighlight onPress={onPress} underlayColor="white">
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
-          <View
-            style={{
-              borderRadius: 18,
-              backgroundColor: "#0C46C4",
-              alignItems: "center",
-              padding: 18,
-              width: "100%",
-            }}
-          >
-            <Text style={{ color: "white", fontSize: 18 }}>{text}</Text>
-          </View>
-        </View>
-      </TouchableHighlight>
-    </View>
-  );
-}
+
